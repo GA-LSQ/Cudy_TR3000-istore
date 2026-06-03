@@ -26,34 +26,6 @@ sed -i 's/LEDE/Cudy/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 sed -i 's/LEDE/Cudy/g' package/base-files/luci2/bin/config_generate
 sed -i 's/LEDE/Cudy/g' package/lean/default-settings/files/zzz-default-settings
 
-# Configure WiFi SSID with auto channel and maximum bandwidth
-cat >> package/base-files/files/etc/config/wireless <<EOF
 
-config wifi-device 'radio1'
-	option type 'mac80211'
-	option hwmode '11a'
-	option path 'pci0000:00/0000:00:00.0'
-	option channel 'auto'
-	option htmode 'VHT160'
-
-config wifi-iface 'wifinet0'
-	option device 'radio1'
-	option network 'lan'
-	option ssid 'Cudy-5G'
-	option encryption 'none'
-
-config wifi-device 'radio0'
-	option type 'mac80211'
-	option hwmode '11g'
-	option path 'pci0000:00/0000:00:01.0'
-	option channel 'auto'
-	option htmode 'HT40'
-
-config wifi-iface 'wifinet1'
-	option device 'radio0'
-	option network 'lan'
-	option ssid 'Cudy-2.4G'
-	option encryption 'none'
-EOF
 
 curl -o package/base-files/files/etc/banner https://raw.githubusercontent.com/istoreos/istoreos/refs/heads/istoreos-22.03/package/base-files/files/etc/banner
