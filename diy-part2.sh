@@ -29,7 +29,7 @@ sed -i 's/LEDE/Cudy/g' package/lean/default-settings/files/zzz-default-settings
 # Configure WiFi SSID with auto channel and maximum bandwidth
 cat >> package/base-files/files/etc/config/wireless <<EOF
 
-config wifi-device 'radio0'
+config wifi-device 'radio1'
 	option type 'mac80211'
 	option hwmode '11a'
 	option path 'pci0000:00/0000:00:00.0'
@@ -37,12 +37,12 @@ config wifi-device 'radio0'
 	option htmode 'VHT160'
 
 config wifi-iface 'wifinet0'
-	option device 'radio0'
+	option device 'radio1'
 	option network 'lan'
 	option ssid 'Cudy-5G'
 	option encryption 'none'
 
-config wifi-device 'radio1'
+config wifi-device 'radio0'
 	option type 'mac80211'
 	option hwmode '11g'
 	option path 'pci0000:00/0000:00:01.0'
@@ -50,7 +50,7 @@ config wifi-device 'radio1'
 	option htmode 'HT40'
 
 config wifi-iface 'wifinet1'
-	option device 'radio1'
+	option device 'radio0'
 	option network 'lan'
 	option ssid 'Cudy-2.4G'
 	option encryption 'none'
