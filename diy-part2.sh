@@ -28,44 +28,6 @@ sed -i 's/LEDE/Cudy/g' package/lean/default-settings/files/zzz-default-settings
 
 curl -o package/base-files/files/etc/banner https://raw.githubusercontent.com/istoreos/istoreos/refs/heads/istoreos-22.03/package/base-files/files/etc/banner
 
-# 配置WiFi：2.4GHz和5GHz分开，无密码
-# 2.4GHz WiFi 配置
-#uci set wireless.@wifi-device[0].txpower=20
-uci set wireless.@wifi-device[0].htmode=HT40
-
-# 创建2.4GHz无密码网络
-uci set wireless.@wifi-iface[0].device=radio0
-uci set wireless.@wifi-iface[0].mode=ap
-uci set wireless.@wifi-iface[0].ssid=Cudy-2.4G
-uci set wireless.@wifi-iface[0].encryption=none
-uci set wireless.@wifi-iface[0].network=lan
-
-# 5GHz WiFi 配置
-#uci set wireless.@wifi-device[1].txpower=20
-uci set wireless.@wifi-device[1].htmode=VHT80
-
-# 创建5GHz无密码网络
-uci set wireless.@wifi-iface[1].device=radio1
-uci set wireless.@wifi-iface[1].mode=ap
-uci set wireless.@wifi-iface[1].ssid=Cudy-5G
-uci set wireless.@wifi-iface[1].encryption=none
-uci set wireless.@wifi-iface[1].network=lan
-
-# 提交WiFi配置
-uci commit wireless
-
-# 设置默认登录密码为admin
-# 获取admin用户的密码哈希值（密码:admin）
-ADMIN_PASS='$1$15u8qIKT$CKaF1XmvOUZfQlQx8TTbO0'
-
-# 修改shadow文件中的root和admin用户密码
-sed -i "s|^root:[^:]*:|root:${ADMIN_PASS}:|" package/base-files/files/etc/shadow 2>/dev/null || true
-
-# 确保root用户密码被设置
-mkdir -p package/base-files/files/etc
-if ! grep -q "^root:" package/base-files/files/etc/shadow 2>/dev/null; then
-    echo "root:${ADMIN_PASS}:19000:0:99999:7:::" >> package/base-files/files/etc/shadow
-fi
 
 # 配置自定义OPKG Feed源
 mkdir -p package/base-files/files/etc/opkg
