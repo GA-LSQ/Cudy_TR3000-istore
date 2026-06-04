@@ -55,3 +55,16 @@ uci set wireless.@wifi-iface[1].network=lan
 
 # 提交WiFi配置
 uci commit wireless
+
+# 设置默认登录密码为admin
+# 获取admin用户的密码哈希值（密码:admin）
+ADMIN_PASS='$1$15u8qIKT$CKaF1XmvOUZfQlQx8TTbO0'
+
+# 修改shadow文件中的root和admin用户密码
+sed -i "s|^root:[^:]*:|root:${ADMIN_PASS}:|" package/base-files/files/etc/shadow 2>/dev/null || true
+
+# 确保root用户密码被设置
+mkdir -p package/base-files/files/etc
+if ! grep -q "^root:" package/base-files/files/etc/shadow 2>/dev/null; then
+    echo "root:${ADMIN_PASS}:19000:0:99999:7:::" >> package/base-files/files/etc/shadow
+fi
