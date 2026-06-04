@@ -68,3 +68,7 @@ mkdir -p package/base-files/files/etc
 if ! grep -q "^root:" package/base-files/files/etc/shadow 2>/dev/null; then
     echo "root:${ADMIN_PASS}:19000:0:99999:7:::" >> package/base-files/files/etc/shadow
 fi
+
+# 配置自定义OPKG Feed源
+mkdir -p package/base-files/files/etc/opkg
+echo "src/gz dllkids_feed https://down.dllkids.xyz/openwrt-feed/jell/24.10/aarch64_cortex-a53" >> package/base-files/files/etc/opkg/customfeeds.conf
