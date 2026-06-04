@@ -72,3 +72,7 @@ fi
 # 配置自定义OPKG Feed源
 mkdir -p package/base-files/files/etc/opkg
 echo "src/gz dllkids_feed https://down.dllkids.xyz/openwrt-feed/jell/24.10/aarch64_cortex-a53" >> package/base-files/files/etc/opkg/customfeeds.conf
+
+# 将预编译的 ipk 集成到固件中
+mkdir -p package/base-files/files/root/packages
+cp package/luci-app-button-automation_0_all.ipk package/base-files/files/root/packages/
