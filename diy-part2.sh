@@ -32,7 +32,7 @@ curl -o package/base-files/files/etc/banner https://raw.githubusercontent.com/is
 
 # 配置WiFi：2.4GHz和5GHz分开，无密码
 # 2.4GHz WiFi 配置
-uci set wireless.@wifi-device[0].txpower=20
+#uci set wireless.@wifi-device[0].txpower=20
 uci set wireless.@wifi-device[0].htmode=HT40
 
 # 创建2.4GHz无密码网络
@@ -43,7 +43,7 @@ uci set wireless.@wifi-iface[0].encryption=none
 uci set wireless.@wifi-iface[0].network=lan
 
 # 5GHz WiFi 配置
-uci set wireless.@wifi-device[1].txpower=20
+#uci set wireless.@wifi-device[1].txpower=20
 uci set wireless.@wifi-device[1].htmode=VHT80
 
 # 创建5GHz无密码网络
