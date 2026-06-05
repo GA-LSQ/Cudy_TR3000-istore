@@ -14,6 +14,7 @@
 #git clone https://github.com/theosoft-git/luci-app-easymesh.git package/luci-app-easymesh
 git clone https://github.com/timsaya/luci-app-bandix package/luci-app-bandix
 git clone https://github.com/timsaya/openwrt-bandix package/openwrt-bandix
+git clone https://github.com/vernesong/OpenClash package/openclash
 
 # Modify default theme
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
