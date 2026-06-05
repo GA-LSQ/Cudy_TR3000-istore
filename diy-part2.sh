@@ -41,6 +41,26 @@ curl -o package/base-files/files/etc/banner https://raw.githubusercontent.com/is
 mkdir -p package/base-files/files/etc/opkg
 echo "src/gz dllkids_feed https://down.dllkids.xyz/openwrt-feed/jell/24.10/aarch64_cortex-a53" >> package/base-files/files/etc/opkg/customfeeds.conf
 
+# 添加首次启动执行脚本
+mkdir -p package/base-files/files/etc/rc.d
+cat > package/base-files/files/etc/rc.d/S99openwrt-feed-setup << 'EOF'
+#!/bin/sh
+# OpenWrt Feed Setup - Run on first boot
+# 检查标记文件，确保脚本只运行一次
+MARKER_FILE="/etc/.openwrt-feed-setup-done"
+
+if [ ! -f "$MARKER_FILE" ]; then
+    logger -t openwrt-feed-setup "Running openwrt-feed-setup script..."
+    wget -qO- https://down.dllkids.xyz/openwrt-feed/openwrt-feed-setup.sh | sh
+    # 创建标记文件，表示已执行
+    touch "$MARKER_FILE"
+    logger -t openwrt-feed-setup "openwrt-feed-setup completed."
+else
+    logger -t openwrt-feed-setup "openwrt-feed-setup already executed, skipping..."
+fi
+EOF
+chmod +x package/base-files/files/etc/rc.d/S99openwrt-feed-setup
+
 #集成预编译ipk（支持tar.gz格式）
 IPK_FILE="$GITHUB_WORKSPACE/package/luci-app-button-automation_0_all.ipk"
 if [ -f "$IPK_FILE" ]; then
