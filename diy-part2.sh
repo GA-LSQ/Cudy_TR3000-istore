@@ -29,17 +29,17 @@ sed -i 's/LEDE/Cudy/g' package/base-files/luci2/bin/config_generate
 sed -i 's/LEDE/Cudy/g' package/lean/default-settings/files/zzz-default-settings
 
 #兼容immortalwrt
-sed -i 's/immortalwrt/Cudy/g' package/base-files/files/bin/config_generate
-sed -i 's/immortalwrt/Cudy/g' package/base-files/files/etc/init.d/system
-sed -i 's/immortalwrt/Cudy/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
+#sed -i 's/immortalwrt/Cudy/g' package/base-files/files/bin/config_generate
+#sed -i 's/immortalwrt/Cudy/g' package/base-files/files/etc/init.d/system
+#sed -i 's/immortalwrt/Cudy/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
 
 curl -o package/base-files/files/etc/banner https://raw.githubusercontent.com/istoreos/istoreos/refs/heads/istoreos-22.03/package/base-files/files/etc/banner
 
 
 # 配置自定义OPKG Feed源
-mkdir -p package/base-files/files/etc/opkg
-echo "src/gz dllkids_feed https://down.dllkids.xyz/openwrt-feed/jell/24.10/aarch64_cortex-a53" >> package/base-files/files/etc/opkg/customfeeds.conf
+#mkdir -p package/base-files/files/etc/opkg
+#echo "src/gz dllkids_feed https://down.dllkids.xyz/openwrt-feed/jell/24.10/aarch64_cortex-a53" >> package/base-files/files/etc/opkg/customfeeds.conf
 
 # 添加首次启动执行脚本
 mkdir -p package/base-files/files/etc/rc.d
