@@ -40,7 +40,7 @@ curl -o package/base-files/files/etc/banner https://raw.githubusercontent.com/is
 
 # 配置自定义OPKG Feed源
 #mkdir -p package/base-files/files/etc/opkg
-#echo "src/gz dllkids_feed https://down.dllkids.xyz/openwrt-feed/jell/24.10/aarch64_cortex-a53" >> package/base-files/files/etc/opkg/customfeeds.conf
+#echo "src/gz kwrt_kiddin9 https://dl.openwrt.ai/releases/24.10/packages/aarch64_cortex-a53/kiddin9" >> package/base-files/files/etc/opkg/customfeeds.conf
 
 # 添加首次启动执行脚本
 mkdir -p package/base-files/files/etc/rc.d
