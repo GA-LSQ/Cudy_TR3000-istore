@@ -18,3 +18,16 @@ echo 'src-git nas_luci https://github.com/linkease/nas-packages-luci.git;main' >
 echo 'src-git istore https://github.com/linkease/istore;main' >> feeds.conf.default
 
 #sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
+
+# 解决rust相关报错
+sed -i 's/ci-llvm=true/ci-llvm=false/g' feeds/packages/lang/rust/Makefile
+
+# openclash
+mkdir -p package/luci-app-openclash
+cd package/luci-app-openclash
+git init
+git remote add origin https://github.com/vernesong/OpenClash.git
+git config core.sparsecheckout true
+echo "luci-app-openclash" >> .git/info/sparse-checkout
+git pull --depth 1 origin master
+cd ../../../
