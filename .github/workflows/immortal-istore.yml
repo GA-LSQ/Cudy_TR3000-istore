@@ -21,7 +21,7 @@ on:
         type: string
         default: 'https://github.com/immortalwrt/immortalwrt'
       
-      REPO_BRANCH: 
+      version: 
         description: '指定版本进行编译，留空拉取最新源码'
         required: true
         type: choice
@@ -30,6 +30,7 @@ on:
           - master
           - openwrt-24.10
           - openwrt-25.12
+          - 
 
 
       commit:
@@ -58,7 +59,7 @@ env:
   CCACHE_DIR: /workdir/.ccache
   CCACHE_MAXSIZE: 2G
   REPO_URL: ${{ github.event.inputs.repo || github.event.client_payload.repo }}
-  REPO_BRANCH: openwrt-24.10-6.6
+  REPO_BRANCH: ${{ github.event.inputs.version }}
   REPO_COMMIT: ${{ github.event.inputs.commit }}
   FEEDS_CONF: feeds.conf.default
   DIY_P1_SH: diy-part1.sh
