@@ -24,11 +24,12 @@ on:
       REPO_BRANCH: 
         description: '指定版本进行编译，留空拉取最新源码'
         required: true
-        type: string
-        default: ''
+        type: choice
+        default: 'openwrt-24.10'
         options:
           - master
-          - 
+          - openwrt-24.10
+          - openwrt-25.12
 
 
       commit:
@@ -37,7 +38,7 @@ on:
         type: string
         default: ''
       ssh:
-        description: '是否执行 make menuconfig, 编译设备为 all 时无效'
+        description: '是否执行 make menuconfig'
         required: false
         type: boolean
         default: false
