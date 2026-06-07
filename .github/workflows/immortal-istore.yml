@@ -13,13 +13,13 @@ on:
         description: '指定源码仓库地址'
         required: true
         type: string
-        default: 'https://github.com/immortalwrt/immortalwrt'
+        default: 'https://github.com/padavanonly/immortalwrt-mt798x-6.6'
         
       version: 
         description: '指定版本进行编译'
         required: true
         type: choice
-        default: 'v24.10.6'
+        default: 'openwrt-24.10-6.6'
         options:
           - master
           - v24.10.4
