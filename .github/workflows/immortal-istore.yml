@@ -22,6 +22,7 @@ on:
         default: 'openwrt-24.10-6.6'
         options:
           - master
+          - openwrt-24.10-6.6
           - v24.10.4
           - v24.10.5
           - v24.10.6
