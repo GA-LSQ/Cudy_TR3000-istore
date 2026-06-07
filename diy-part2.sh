@@ -44,6 +44,38 @@ curl -o package/base-files/files/etc/banner https://raw.githubusercontent.com/is
 #mkdir -p package/base-files/files/etc/opkg
 #echo "src/gz kwrt_kiddin9 https://dl.openwrt.ai/releases/24.10/packages/aarch64_cortex-a53/kiddin9" >> package/base-files/files/etc/opkg/customfeeds.conf
 
+# ========== 预置 dllkids 第三方 opkg 源 ==========
+ARCH="aarch64_cortex-a53"            # 请根据你的设备架构修改
+SDK_VERSION="24.10"                  # 24.10 (opkg) 或 25.12 (apk)
+FEED_BASE_URL="https://down.dllkids.xyz/openwrt-feed"
+FEED_URL="${FEED_BASE_URL}/${SDK_VERSION}/${ARCH}"
+KEY_URL="${FEED_BASE_URL}/keys/dllkids-feed.pub"
+
+mkdir -p files/etc/opkg
+mkdir -p files/etc/opkg/keys
+
+CONF_FILE="files/etc/opkg/customfeeds.conf"
+
+# 避免重复添加
+if grep -q "dllkids_feed" "$CONF_FILE" 2>/dev/null; then
+    echo "dllkids feed already present, skipping..."
+else
+    echo "src/gz dllkids_feed ${FEED_URL}" >> "$CONF_FILE"
+    echo "Added dllkids feed to $CONF_FILE"
+fi
+
+# 下载公钥
+echo "Downloading public key from ${KEY_URL}..."
+if wget -q -O "files/etc/opkg/keys/dllkids-feed.pub" "$KEY_URL"; then
+    echo "Public key downloaded successfully."
+else
+    echo "ERROR: Failed to download public key" >&2
+    exit 1
+fi
+
+echo "dllkids feed (opkg) integration completed."
+# =================================================
+
 
 #集成预编译ipk（支持tar.gz格式）
 IPK_FILE="$GITHUB_WORKSPACE/package/luci-app-button-automation_0_all.ipk"
