@@ -1,4 +1,4 @@
-name: ImmortalWrt Builder
+name: openwrt official Builder
 
 permissions:
   contents: write
