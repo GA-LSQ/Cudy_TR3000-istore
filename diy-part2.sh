@@ -19,7 +19,14 @@ git clone https://github.com/sirpdboy/luci-app-advancedplus package/luci-app-adv
 git clone https://github.com/sbwml/luci-app-quickfile package/quickfile
 git clone https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon
 git clone https://github.com/kenzok8/openwrt-clashoo.git package/openwrt-clashoo
-git clone https://github.com/padavanonly/immortalwrt-mt798x-6.6/tree/openwrt-24.10-6.6/package/mtk/applications/luci-app-turboacc-mtk package/luci-app-turboacc-mtk
+
+mkdir -p package/luci-app-turboacc-mtk && cd $_
+git init -q
+git remote add origin https://github.com/padavanonly/immortalwrt-mt798x-6.6.git
+git config core.sparseCheckout true
+echo "package/mtk/applications/luci-app-turboacc-mtk/" >> .git/info/sparse-checkout
+git pull -q origin openwrt-24.10-6.6
+cd - > /dev/null
 
 # Modify default theme
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
