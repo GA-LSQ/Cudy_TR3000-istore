@@ -19,7 +19,7 @@ on:
         description: '指定版本进行编译'
         required: true
         type: choice
-        default: 'openwrt-24.10-6.6'
+        default: ''
         options:
           - master
           - openwrt-24.10-6.6
