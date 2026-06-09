@@ -20,9 +20,9 @@ on:
     - cron: 0 0 1 * *
 
 env:
-  REPO_URL: https://github.com/coolsnowwolf/lede
-  # REPO_BRANCH: master            # 已注释，改用固定 commit
-  REPO_COMMIT: ecec1ef93a8920f30ef927d989b13b674d614ca6
+  REPO_URL: https://github.com/immortalwrt/immortalwrt
+  REPO_BRANCH: v24.10.6            # 已注释，改用固定 commit
+  #REPO_COMMIT: ecec1ef93a8920f30ef927d989b13b674d614ca6
   #72ad29820c3a8a138b55665527bd857be476028d   # 固定到 24.10 系列快照
   #ecec1ef93a8920f30ef927d989b13b674d614ca6   # 最后 24.10.5 版本
   FEEDS_CONF: feeds.conf.default
