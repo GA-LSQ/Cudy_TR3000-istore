@@ -39,48 +39,6 @@ cd ../../../
 #sed -i "/CYXluq4wUazHjmCDBCqXF/d" package/lean/default-settings/files/zzz-default-settings
 
 
-
-
-# 创建 uci-defaults 目录
-mkdir -p package/base-files/files/etc/uci-defaults
-
-# 写入脚本
-cat > package/base-files/files/etc/uci-defaults/99-feed-setup << 'EOF'
-#!/bin/sh
-MARKER="/etc/.feed-setup-done"
-[ -f "$MARKER" ] && exit 0
-
-TIMEOUT=600
-INTERVAL=2
-ELAPSED=0
-URL="https://down.dllkids.xyz/openwrt-feed/openwrt-feed-setup.sh"
-
-can_reach_script() {
-    wget --spider --timeout=3 --tries=1 "$URL" >/dev/null 2>&1
-}
-
-while [ $ELAPSED -lt $TIMEOUT ]; do
-    if can_reach_script; then
-        logger -t feed-setup "Script URL reachable. Running setup..."
-        if wget -qO- "$URL" | sh; then
-            logger -t feed-setup "Setup succeeded."
-            touch "$MARKER"
-            exit 0
-        else
-            logger -t feed-setup "Setup failed. Will retry next boot."
-            exit 1
-        fi
-    fi
-    sleep $INTERVAL
-    ELAPSED=$((ELAPSED + INTERVAL))
-done
-
-logger -t feed-setup "Script URL not reachable after ${TIMEOUT}s. Will retry next boot."
-exit 1
-EOF
-
-chmod +x package/base-files/files/etc/uci-defaults/99-feed-setup
-
 # 设置首次启动脚本将密码改为 admin
 mkdir -p package/base-files/files/etc/uci-defaults
 cat > package/base-files/files/etc/uci-defaults/99_set_password << 'EOF'
