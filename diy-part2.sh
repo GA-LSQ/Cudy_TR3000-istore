@@ -19,7 +19,7 @@ git clone https://github.com/sirpdboy/luci-app-advancedplus package/luci-app-adv
 git clone https://github.com/sbwml/luci-app-quickfile package/quickfile
 git clone https://github.com/kenzok8/openwrt-clashoo.git package/openwrt-clashoo
 
-#make package/clashoo
+
 
 # Modify default theme
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
@@ -34,12 +34,12 @@ sed -i 's/LEDE/Cudy/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 sed -i 's/LEDE/Cudy/g' package/base-files/luci2/bin/config_generate
 sed -i 's/LEDE/Cudy/g' package/lean/default-settings/files/zzz-default-settings
 
-#兼容immortalwrt
+#immortalwrt
 sed -i 's/immortalwrt/Cudy/g' package/base-files/files/bin/config_generate
 sed -i 's/immortalwrt/Cudy/g' package/base-files/files/etc/init.d/system
 sed -i 's/immortalwrt/Cudy/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
-
+#使用iStoreOS banner
 curl -o package/base-files/files/etc/banner https://raw.githubusercontent.com/istoreos/istoreos/refs/heads/istoreos-22.03/package/base-files/files/etc/banner
 
 
